@@ -14,6 +14,8 @@ jobs:
     name: Update today xin wen lian bo
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
