@@ -3,7 +3,7 @@ name: Update today xin wen lian bo
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 23 * * *' # once a day at 19:40 UTC / 11:40 PST
+    - cron: '00 23 * * *'
 
 # permissions:
 #   contents: read
@@ -19,5 +19,5 @@ jobs:
           cache: npm
       - name: npm i
         run: npm i
-      - name: node index.js
-        run: node index.js
+      - name: npm run index
+        run: npm run index
