@@ -17,8 +17,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          cache: npm
-      - name: npm i
-        run: npm i
+          cache: 'npm'
+          cache-dependency-path: './package-lock.json'
+      - name: npm install
+        run: npm install
       - name: npm run index
         run: npm run index
