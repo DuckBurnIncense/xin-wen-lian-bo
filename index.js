@@ -1,7 +1,7 @@
 import fetch from './fetch.js';
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
-import fs, { link } from 'fs';
+import fs from 'fs';
 import path from 'path';
 
 import { fileURLToPath } from "url";
