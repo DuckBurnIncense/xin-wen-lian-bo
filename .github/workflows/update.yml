@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # 东八区 (UTC+8), 所以要+8小时
-    - cron: '50 7 * * *'
+    - cron: '00 7 * * *'
 
 # permissions:
 #   contents: read
