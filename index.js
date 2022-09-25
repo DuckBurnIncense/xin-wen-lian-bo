@@ -41,7 +41,7 @@ const getAbstract = async link => {
 	const dom = new JSDOM(HTML);
 	const abstract = dom.window.document.querySelector(
 		'#page_body > div.allcontent > div.video18847 > div.playingCon > div.nrjianjie_shadow > div > ul > li:nth-child(1) > p'
-	).innerHTML.replaceAll('； ', "\n\n");
+	).innerHTML.replaceAll('；', "；\n").replaceAll('：', "：\n");
 	console.log('成功获取新闻简介');
 	return abstract;
 }
@@ -53,10 +53,11 @@ const getNews = async links => {
 	var news = [];
 	for (let i = 0; i < linksLength; i++) {
 		const url = links[i];
+		console.log(url);
 		const html = await fetch(url);
 		const dom = new JSDOM(html);
-		const title = dom.window.document.querySelector('#page_body > div.allcontent > div.video18847 > div.playingVideo > div.tit').innerHTML.replace('[视频]', '');
-		const content = dom.window.document.querySelector('#content_area').innerHTML;
+		const title = dom.window.document.querySelector('#page_body > div.allcontent > div.video18847 > div.playingVideo > div.tit')?.innerHTML?.replace('[视频]', '');
+		const content = dom.window.document.querySelector('#content_area')?.innerHTML;
 		news.push({ title, content });
 		console.count('获取的新闻则数');
 	}
