@@ -3,8 +3,8 @@ name: Update today xin wen lian bo
 on:
   workflow_dispatch:
   schedule:
-    # 东八区 (UTC+8), 所以要+8小时
-    - cron: '00 7 * * *'
+    # 东八区 (UTC+8), 所以要-8小时
+    - cron: '05 15 * * *'
 
 # permissions:
 #   contents: read
