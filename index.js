@@ -8,7 +8,12 @@ import { fileURLToPath } from "url";
 // const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const DATE = '20220925';
+const getDate = () => {
+	const add0 = num => num < 10 ? ('0' + num) : num;
+	const date = new Date();
+	return '' + date.getFullYear() + add0(date.getMonth() + 1) + add0(date.getDate());
+}
+const DATE = getDate();
 console.log('当前获取的日期:', DATE);
 const SAVE_PATH = path.join(__dirname, 'news', DATE + '.md');
 console.log('保存新闻文件的地址:', SAVE_PATH);
@@ -53,7 +58,6 @@ const getNews = async links => {
 	var news = [];
 	for (let i = 0; i < linksLength; i++) {
 		const url = links[i];
-		console.log(url);
 		const html = await fetch(url);
 		const dom = new JSDOM(html);
 		const title = dom.window.document.querySelector('#page_body > div.allcontent > div.video18847 > div.playingVideo > div.tit')?.innerHTML?.replace('[视频]', '');
