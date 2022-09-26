@@ -24,7 +24,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "AUTO UPDATE[bot]" -a
+          git add .
+          git commit -m "AUTO UPDATE[bot]"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
