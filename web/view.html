@@ -9,8 +9,7 @@
 		<script src="./showdown.min.js"></script>
 	</head>
 	<body>
-		<div id="view" class="markdown-body">
-		</div>
+		<div id="view" class="markdown-body"></div>
 		<style>
 			html, 
 			body, 
@@ -37,7 +36,7 @@
 			}
 			const date = getQueryString('date') || 'Error';
 			document.title = document.title.replace('{{date}}', date);
-			fetch(`./${date}.md`).then(response => {
+			fetch(`/news/${date}.md`).then(response => {
 				return response.text();
 			}).then(md => {
 				render(md);

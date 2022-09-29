@@ -152,7 +152,7 @@ const updateCatalogue = async ({ catalogueJsonPath, readmeMdPath, date, abstract
 	await readFile(catalogueJsonPath).then(async data => {
 		data = data.toString();
 		let catalogueJson = JSON.parse(data || '[]');
-		catalogueJson.push({
+		catalogueJson.unshift({
 			date,
 			abstract,
 		});
