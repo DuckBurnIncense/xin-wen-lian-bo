@@ -37,6 +37,7 @@
 			const date = getQueryString('date') || 'Error';
 			document.title = document.title.replace('{{date}}', date);
 			fetch(`/news/${date}.md`).then(response => {
+				if(response.status < 200 || response.status > 300) throw Error(response.statusText);
 				return response.text();
 			}).then(md => {
 				render(md);
