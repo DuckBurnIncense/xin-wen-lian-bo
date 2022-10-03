@@ -19,22 +19,10 @@ jobs:
       - run: npm run index
       - run: git config --local user.email "github-actions[bot]@github.com"
       - run: git config --local user.name "github-actions[bot]"
-      - run: git checkout master
       - run: git add .
-      - run: git commit -m "AUTO UPDATE (master)[bot]"
-      - run: git branch merge_temp
-      - run: git checkout web
-      - run: git checkout merge_temp news/
-      - run: git add .
-      - run: git commit -m "AUTO UPDATE (web)[bot]"
-      - run: git branch -D merge_temp
+      - run: git commit -m "AUTO UPDATE [bot]"
       - name: Push master changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
-      - name: Push web changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: web
