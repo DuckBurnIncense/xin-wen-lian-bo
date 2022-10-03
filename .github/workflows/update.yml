@@ -17,19 +17,17 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run index
-      - name: Commit files
-        run: |
-          git config --local user.email "github-actions[bot]@github.com"
-          git config --local user.name "github-actions[bot]"
-          git checkout master
-          git add .
-          git commit -m "AUTO UPDATE (master)[bot]"
-          git branch merge_temp
-          git checkout web
-          git checkout merge_temp news/
-          git add .
-          git commit -m "AUTO UPDATE (web)[bot]"
-          git branch -D merge_temp
+      - run: git config --local user.email "github-actions[bot]@github.com"
+      - run: git config --local user.name "github-actions[bot]"
+      - run: git checkout master
+      - run: git add .
+      - run: git commit -m "AUTO UPDATE (master)[bot]"
+      - run: git branch merge_temp
+      - run: git checkout web
+      - run: git checkout merge_temp news/
+      - run: git add .
+      - run: git commit -m "AUTO UPDATE (web)[bot]"
+      - run: git branch -D merge_temp
       - name: Push master changes
         uses: ad-m/github-push-action@master
         with:
