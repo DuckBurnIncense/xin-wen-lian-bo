@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>新闻联播文字稿</title>
-		<link rel="stylesheet" href="/web/github-markdown.min.css">
-		<script src="/web/showdown.min.js"></script>
+		<link rel="stylesheet" href="./github-markdown.min.css">
+		<script src="./showdown.min.js"></script>
 	</head>
 	<body>
 		<div id="view" class="markdown-body">加载中...</div>
@@ -51,18 +51,18 @@
 				json.forEach(theNew => {
 					let date = theNew.date;
 					let abstract = theNew.abstract.replaceAll("\n", ' ');
-					md += `- 《新闻联播》 (${date}) [\[查看摘要\]](#${date})  [\[阅读全篇\]](/web/view.html?date=${date})\n`;
+					md += `- 《新闻联播》 (${date}) [\[查看摘要\]](#${date})  [\[阅读全篇\]](view.html?date=${date})\n`;
 				});
 				md += `## 新闻摘要\n` + 
 						"\n";
 				json.forEach(theNew => {
 					let date = theNew.date;
 					let abstract = theNew.abstract.replaceAll("\n", ' ');
-					md += `### [《新闻联播》 (${date})](/web/view.html?date=${date}) {${date}}` + 
+					md += `### [《新闻联播》 (${date})](view.html?date=${date}) {${date}}` + 
 						"\n" + 
 						`${abstract}\n` + 
 						"\n" + 
-						`[阅读全文](/web/view.html?date=${date})\n` + 
+						`[阅读全文](view.html?date=${date})\n` + 
 						"\n" + 
 						"\n";
 				});
