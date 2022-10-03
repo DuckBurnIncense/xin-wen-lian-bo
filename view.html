@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{date}} - 新闻联播文字稿查看</title>
+		<link rel="stylesheet" href="./github-markdown.min.css">
+		<script src="./showdown.min.js"></script>
+	</head>
+	<body>
+		<div id="view" class="markdown-body">加载中...</div>
+		<style>
+			html, 
+			body, 
+			.markdown-body {
+				padding: 0;
+				border: none;
+				margin: 0;
+				height: 100%;
+				width: 100%;
+				word-break: break-all;
+				box-sizing: border-box;
+			}
+			.markdown-body {
+				padding: 1.2em;
+				overflow: auto;
+			}
+		</style>
+		<script>
+			function getQueryString(name) {
+				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return unescape(r[2]);
+				return null;
+			}
+			const date = getQueryString('date') || 'Error';
+			document.title = document.title.replace('{{date}}', date);
+			fetch(`/news/${date}.md`).then(response => {
+				if(response.status < 200 || response.status > 300) throw Error(response.statusText);
+				return response.text();
+			}).then(md => {
+				render(md);
+			}).catch(e => {
+				fetch(`./Error.md`).then(errResponse => {
+					return errResponse.text();
+				}).then(errMd => {
+					render(errMd);
+				});
+			});
+			function render(markdown) {
+				document.getElementById('view').innerHTML = new showdown.Converter().makeHtml(markdown);
+			}
+		</script>
+	</body>
+</html>
