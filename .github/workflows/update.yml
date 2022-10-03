@@ -6,9 +6,6 @@ on:
     # 东八区 (UTC+8), 所以要-8小时
     - cron: '30 12 * * *'
 
-# permissions:
-#   contents: read
-
 jobs:
   update:
     name: Update today xin wen lian bo
@@ -24,10 +21,22 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@github.com"
           git config --local user.name "github-actions[bot]"
+          git checkout master
           git add .
-          git commit -m "AUTO UPDATE[bot]"
-      - name: Push changes
+          git commit -m "AUTO UPDATE (master)[bot]"
+          git branch merge_temp
+          git checkout web
+          git checkout merge_temp news/
+          git add .
+          git commit -m "AUTO UPDATE (web)[bot]"
+          git branch -D merge_temp
+      - name: Push master changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
+      - name: Push web changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: web
