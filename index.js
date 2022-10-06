@@ -97,7 +97,7 @@ const getAbstract = async link => {
 	const dom = new JSDOM(HTML);
 	const abstract = dom.window.document.querySelector(
 		'#page_body > div.allcontent > div.video18847 > div.playingCon > div.nrjianjie_shadow > div > ul > li:nth-child(1) > p'
-	).innerHTML.replaceAll('；', "；\n").replaceAll('：', "：\n");
+	).innerHTML.replaceAll('；', "；\n\n").replaceAll('：', "：\n\n");
 	console.log('成功获取新闻简介');
 	return abstract;
 }
