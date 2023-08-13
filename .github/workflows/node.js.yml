@@ -1,0 +1,28 @@
+name: Update today xin wen lian bo
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 东八区 (UTC+8), 所以要-8小时
+    - cron: '30 12 * * *'
+
+jobs:
+  update:
+    name: Update today xin wen lian bo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run index
+      - run: git config --local user.email "github-actions[bot]@github.com"
+      - run: git config --local user.name "github-actions[bot]"
+      - run: git add .
+      - run: git commit -m "AUTO UPDATE [bot]"
+      - name: Push master changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
