@@ -49,7 +49,17 @@
 				});
 			});
 			function render(markdown) {
-				document.getElementById('view').innerHTML = new showdown.Converter().makeHtml(markdown);
+				var html = new showdown.Converter().makeHtml(markdown);
+				var doc = new DOMParser().parseFromString(html, 'text/html');
+				doc.querySelectorAll('script, style, iframe, object, embed, link, meta, form').forEach(function (el) { el.remove(); });
+				doc.querySelectorAll('*').forEach(function (el) {
+					Array.prototype.slice.call(el.attributes).forEach(function (attr) {
+						if (/^on/i.test(attr.name) || (/^(href|src)$/i.test(attr.name) && /^\s*javascript:/i.test(attr.value))) {
+							el.removeAttribute(attr.name);
+						}
+					});
+				});
+				document.getElementById('view').innerHTML = doc.body.innerHTML;
 			}
 		</script>
 	</body>
